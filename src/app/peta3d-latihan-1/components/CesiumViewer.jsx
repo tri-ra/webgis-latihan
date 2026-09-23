@@ -12,8 +12,8 @@ const LOKASI_AWAL = {
   latitude: -6.2432495,
   longitude: 106.7979208,
   ketinggian: 2000,
-  heading: 0,      
-  pitch: -30,       
+  heading: 20,      
+  pitch: -35,       
 };
 
 const VIEWER_OPTIONS = {

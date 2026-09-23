@@ -55,9 +55,9 @@ export default function LeafletTutorial() {
       layersRef.current.osm = osm;
       /* ===================== END STEP 1 ===================== */
 
-      //  ============================================================
-      //    STEP 2 — MENAMPILKAN DATA WMS
-      //    Isi WMS_URL & WMS_LAYER_NAME di atas dulu, baru uncomment blok ini.
+      /* ============================================================
+         STEP 2 — MENAMPILKAN DATA WMS
+         Isi WMS_URL & WMS_LAYER_NAME di atas dulu, baru uncomment blok ini.
 
       const wmsLayer = L.tileLayer.wms(WMS_URL, {
         layers: WMS_LAYER_NAME,
@@ -68,12 +68,12 @@ export default function LeafletTutorial() {
 
       layersRef.current.wms = wmsLayer;
 
-        //  ===================== END STEP 2 ===================== */
+         ===================== END STEP 2 ===================== */
 
-      //  ============================================================
-        //  STEP 3 — MENAMPILKAN DATA WFS
-        //  WFS mengembalikan GeoJSON (bukan gambar/tile seperti WMS), jadi
-        //  kita fetch manual lalu render pakai L.geoJSON.
+      /* ============================================================
+         STEP 3 — MENAMPILKAN DATA WFS
+         WFS mengembalikan GeoJSON (bukan gambar/tile seperti WMS), jadi
+         kita fetch manual lalu render pakai L.geoJSON.
 
       try {
         const res = await fetch(WFS_URL);
@@ -98,18 +98,18 @@ export default function LeafletTutorial() {
         console.error("Gagal memuat WFS:", err);
       }
 
-        //  ===================== END STEP 3 ===================== */
+         ===================== END STEP 3 ===================== */
 
-      //  ============================================================
-      //    STEP 4 — MENAMPILKAN DATA WCS
-      //    WCS umumnya data raster (DEM, citra satelit, dll). Leaflet tidak
-      //    punya "WCS layer" bawaan seperti WMS, jadi kita minta GeoServer
-      //    men-generate satu gambar lewat GetCoverage, lalu tampilkan
-      //    sebagai image overlay dengan bounding box yang sesuai.
+      /* ============================================================
+         STEP 4 — MENAMPILKAN DATA WCS
+         WCS umumnya data raster (DEM, citra satelit, dll). Leaflet tidak
+         punya "WCS layer" bawaan seperti WMS, jadi kita minta GeoServer
+         men-generate satu gambar lewat GetCoverage, lalu tampilkan
+         sebagai image overlay dengan bounding box yang sesuai.
 
-      //    Catatan: tidak semua WCS server bisa langsung output image/png.
-      //    Kalau gagal/blank, cek dulu format yang didukung server kamu
-      //    (biasanya lewat DescribeCoverage) dan sesuaikan parameter format.
+         Catatan: tidak semua WCS server bisa langsung output image/png.
+         Kalau gagal/blank, cek dulu format yang didukung server kamu
+         (biasanya lewat DescribeCoverage) dan sesuaikan parameter format.
 
       try {
         const [minx, miny, maxx, maxy] = WCS_BBOX.split(",").map(Number);
@@ -135,13 +135,13 @@ export default function LeafletTutorial() {
         console.error("Gagal memuat WCS:", err);
       }
 
-        //  ===================== END STEP 4 ===================== */
+         ===================== END STEP 4 ===================== */
 
-      //  ============================================================
-      //    STEP 5 — WIDGET LAYER CONTROL (nyalakan/matikan layer)
-      //    Pakai kontrol bawaan Leaflet: L.control.layers.
-      //    Layer yang otomatis muncul di sini hanya yang sudah kamu
-      //    uncomment di STEP 2-4 (wms/wfs/wcs).
+      /* ============================================================
+         STEP 5 — WIDGET LAYER CONTROL (nyalakan/matikan layer)
+         Pakai kontrol bawaan Leaflet: L.control.layers.
+         Layer yang otomatis muncul di sini hanya yang sudah kamu
+         uncomment di STEP 2-4 (wms/wfs/wcs).
 
       const overlayLayers = {};
       if (layersRef.current.wms) overlayLayers["Layer WMS"] = layersRef.current.wms;
@@ -150,13 +150,13 @@ export default function LeafletTutorial() {
 
       L.control.layers(null, overlayLayers, { collapsed: false }).addTo(map);
 
-        //  ===================== END STEP 5 ===================== */
+         ===================== END STEP 5 ===================== */
 
-      //  ============================================================
-      //    STEP 6 (bagian 1/3) — SIAPKAN BASEMAP TAMBAHAN
-      //    Kita buat widget switch basemap SENDIRI (bukan pakai kontrol
-      //    bawaan Leaflet) supaya kamu belajar cara kelola layer secara
-      //    manual dari React. Bagian 2 & 3 ada di luar useEffect ini.
+      /* ============================================================
+         STEP 6 (bagian 1/3) — SIAPKAN BASEMAP TAMBAHAN
+         Kita buat widget switch basemap SENDIRI (bukan pakai kontrol
+         bawaan Leaflet) supaya kamu belajar cara kelola layer secara
+         manual dari React. Bagian 2 & 3 ada di luar useEffect ini.
 
       const satellite = L.tileLayer(
         "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -168,7 +168,7 @@ export default function LeafletTutorial() {
         satellite,
       };
 
-        //  ===================== END STEP 6 (bagian 1/3) ===================== */
+         ===================== END STEP 6 (bagian 1/3) ===================== */
 
       setTimeout(() => {}, 0); // no-op, biar block di atas tidak jadi statement terakhir yang aneh saat di-uncomment
     };
@@ -184,9 +184,9 @@ export default function LeafletTutorial() {
     };
   }, []);
 
-  //  ============================================================
-  //    STEP 6 (bagian 2/3) — FUNGSI SWITCH BASEMAP
-  //    Dipanggil dari tombol di JSX (bagian 3/3, di bawah).
+  /* ============================================================
+     STEP 6 (bagian 2/3) — FUNGSI SWITCH BASEMAP
+     Dipanggil dari tombol di JSX (bagian 3/3, di bawah).
 
   const handleSwitchBasemap = (key) => {
     const map = mapRef.current;
@@ -198,29 +198,29 @@ export default function LeafletTutorial() {
     setActiveBasemap(key);
   };
 
-    //  ===================== END STEP 6 (bagian 2/3) ===================== */
+     ===================== END STEP 6 (bagian 2/3) ===================== */
 
   /* ============================================================
      STEP 7 (bagian 1/2) — LEGENDA DINAMIS DARI LAYER WMS
      GeoServer bisa generate gambar legenda otomatis lewat
      GetLegendGraphic. Kita bentuk URL-nya dari WMS_URL & WMS_LAYER_NAME
      yang sudah kamu isi di STEP 2.
-*/
+
   const legendUrl =
     `${WMS_URL}?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png` +
     `&WIDTH=20&HEIGHT=20&LAYER=${encodeURIComponent(WMS_LAYER_NAME)}`;
 
-    //  ===================== END STEP 7 (bagian 1/2) ===================== 
+     ===================== END STEP 7 (bagian 1/2) ===================== */
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "600px" }}>
       <div ref={mapContainerRef} style={{ width: "100%", height: "100%" }} />
 
       {/* ============================================================
          STEP 6 (bagian 3/3) — TOMBOL SWITCH BASEMAP
          Uncomment bareng bagian 1/3 (di dalam useEffect) dan
          bagian 2/3 (handleSwitchBasemap) di atas.
-*/}
+
       <div
         style={{
           position: "absolute",
@@ -249,16 +249,17 @@ export default function LeafletTutorial() {
         </button>
       </div>
 
-        {/* ===================== END STEP 6 (bagian 3/3) ===================== */}
+         ===================== END STEP 6 (bagian 3/3) ===================== */}
 
       {/* ============================================================
          STEP 7 (bagian 2/2) — TAMPILKAN GAMBAR LEGENDA
          Uncomment bareng bagian 1/2 (variabel legendUrl) di atas.
-*/}
-<div
- style={{
+
+      <img
+        src={legendUrl}
+        alt="Legenda"
+        style={{
           position: "absolute",
-          color: "black",
           bottom: 16,
           right: 16,
           background: "#fff",
@@ -266,15 +267,10 @@ export default function LeafletTutorial() {
           borderRadius: 8,
           boxShadow: "0 1px 4px rgba(0,0,0,0.3)",
           zIndex: 1000,
-        }}>
-  <p>Legenda</p>
-  <img src={legendUrl} alt="Legenda"
+        }}
       />
-      <p>Jakarta</p>
-      </div>
-      
 
-         {/*===================== END STEP 7 (bagian 2/2) ===================== */}
+         ===================== END STEP 7 (bagian 2/2) ===================== */}
     </div>
   );
 }

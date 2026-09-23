@@ -12,14 +12,6 @@ export default function addLayerBasemap(viewer) {
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       credit: '© Esri',
     }),
-    'Google Street': new Cesium.UrlTemplateImageryProvider({
-      url: 'https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-      credit: '© Google',
-    }),
-    'Peta RBI': new Cesium.UrlTemplateImageryProvider({
-      url: 'https://geoservices.big.go.id/rbi/rest/services/BASEMAP/Rupabumi_Indonesia/MapServer/tile/{z}/{y}/{x}',
-      credit: '© BIG',
-    }),
   };
 
   const namaAwal = Object.keys(baseMaps)[0];
